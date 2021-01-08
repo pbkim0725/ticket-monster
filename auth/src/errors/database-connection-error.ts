@@ -1,6 +1,6 @@
-import { AbstractError } from "./abstract-error";
+import { BaseError } from "./base-error";
 
-export class DatabaseConnectionError extends AbstractError {
+export class DatabaseConnectionError extends BaseError {
 	statusCode = 500;
 	reason = "Error connecting to database";
 

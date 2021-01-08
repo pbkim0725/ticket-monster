@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AbstractError } from "../errors/abstract-error";
+import { BaseError } from "../errors/base-error";
 
 export function errorHandler(
 	err: Error,
@@ -7,7 +7,7 @@ export function errorHandler(
 	res: Response,
 	next: NextFunction
 ) {
-	if (err instanceof AbstractError) {
+	if (err instanceof BaseError) {
 		return res.status(err.statusCode).send({ errors: err.serializeErrors() });
 	}
 
