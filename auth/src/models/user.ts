@@ -6,16 +6,29 @@ interface UserAttributes {
 	password: string;
 }
 
-const userSchema = new mongoose.Schema({
-	email: {
-		type: String,
-		required: true,
+const userSchema = new mongoose.Schema(
+	{
+		email: {
+			type: String,
+			required: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
 	},
-	password: {
-		type: String,
-		required: true,
-	},
-});
+	{
+		// options
+		toJSON: {
+			transform(_, ret) {
+				ret.id = ret._id;
+				delete ret._id;
+				delete ret.password;
+			},
+			versionKey: false,
+		},
+	}
+);
 
 //An Interface that describes the properties that user Model has
 interface UserModel extends mongoose.Model<UserDoc> {
